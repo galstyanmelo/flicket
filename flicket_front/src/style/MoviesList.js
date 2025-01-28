@@ -21,6 +21,11 @@ export const ListContainer = styled.div`
     padding: 25px 20px;
     width: calc(100% - 40px);
   }
+
+  @media (max-width: 700px) {
+    padding: 20px 20px 0 20px;
+    width: calc(100% - 40px);
+  }
 `;
 
 export const MovieItem = styled.div`
@@ -31,6 +36,11 @@ export const MovieItem = styled.div`
   width: 250px;
   flex-shrink: 0;
   transition: transform 0.3s ease;
+
+  @media (max-width: 900px) {
+    height: 200px;
+    width: 150px;
+  }
 
   ${({ $selected }) => $selected && "transform: translateY(-15px)"};
 

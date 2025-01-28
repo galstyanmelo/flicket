@@ -2,12 +2,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { Blur } from "transitions-kit";
 
 // ** Style Components
 import { ListContainer, MovieItem, Rate, RateContainer, StyledAsyncImage } from "../../style/MoviesList";
 import { movieSearchService, resetMovieSearch } from "../../store/movie/MovieSearchService";
 import { LoadingAnimation } from "../loading/LoadingAnimation";
+
+// ** Third Party Libraries
+import { Blur } from "transitions-kit";
 
 
 export function MoviesList({ setSelectedMovie, selectedCineroom, handleMovieChange, selectedMovie }) {

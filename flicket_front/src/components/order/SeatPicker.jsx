@@ -61,6 +61,8 @@ export function SeatPicker({ hideModal, empty, selectedTime, setSelectedTime }) 
       });
       setSeats(newSeats);
       dispatch(resetCreateSeat());
+      setSelectedSeats([])
+      toast.remove()
       toast.success("Your seats have been successfully reserved! Enjoy your movie.", {duration: 3000})
     } else if (createSeatData.status === "rejected") {
       dispatch(resetCreateSeat())
@@ -89,8 +91,7 @@ export function SeatPicker({ hideModal, empty, selectedTime, setSelectedTime }) 
       setSelectedSeats((prev) => [...prev, { row: rowIndex + 1, column: colIndex + 1 } ]);
     } else if (currentStatus === 'selected') {
       newSeats[rowIndex][colIndex] = 'available';
-      setSelectedSeats((prev) => prev.filter((seat) => seat.row !== rowIndex + 1 || seat.column !== colIndex + 1)
-      );
+      setSelectedSeats((prev) => prev.filter((seat) => seat.row !== rowIndex + 1 || seat.column !== colIndex + 1));
     }
 
     setSeats(newSeats);

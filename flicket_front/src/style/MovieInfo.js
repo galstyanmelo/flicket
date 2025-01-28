@@ -35,7 +35,7 @@ export const ContentContainer = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 50%;
   padding-top: 40px;
 
   @media (max-width: 600px) {
@@ -55,7 +55,7 @@ export const Title = styled.span`
   margin-bottom: 20px;
   text-shadow: 2px 2px 4px black;
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     font-size: 30px;
     margin-bottom: 10px;
   }
@@ -76,6 +76,10 @@ const StyledSpan = styled.span`
 
 export const ProducerSpan = styled(StyledSpan)`
   margin-top: 15px;
+
+  @media (max-width: 700px) {
+    margin-top: 5px;
+  }
 `;
 
 export const GenreSpan = styled(StyledSpan)`

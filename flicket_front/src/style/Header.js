@@ -24,6 +24,11 @@ export const ButtonsWarpper = styled.div`
   display: flex;
   align-items: center;
   gap: clamp(10px, 0vw, 50px);
+
+  @media (max-width: 570px) {
+    width: 100%;
+    justify-content: space-between;
+  }
 `;
 
 export const HeaderButton = styled.button`
@@ -46,7 +51,8 @@ export const HeaderButton = styled.button`
   `}
   
   @media (max-width: 450px) {
-    padding: 10px 8px;
+    padding: 10px 2px;
+    font-size: 15px;
   }
 
   &:hover {
