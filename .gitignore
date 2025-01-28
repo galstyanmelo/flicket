@@ -14,8 +14,11 @@ node_modules
 # production
 /build
 build
+
 /frontend
 frontend
+
+
 /config
 config
 
