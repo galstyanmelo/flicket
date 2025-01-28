@@ -2,9 +2,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { Blur } from "transitions-kit";
 
 // ** Style Components
-import { ListContainer, MovieImage, MovieItem, Rate, RateContainer } from "../../style/MoviesList";
+import { ListContainer, MovieItem, Rate, RateContainer, StyledAsyncImage } from "../../style/MoviesList";
 import { movieSearchService, resetMovieSearch } from "../../store/movie/MovieSearchService";
 import { LoadingAnimation } from "../loading/LoadingAnimation";
 
@@ -19,7 +20,6 @@ export function MoviesList({ setSelectedMovie, selectedCineroom, handleMovieChan
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false)
   const [isAllowRequest, setIsAllowRequest] = useState(true)
-  const [isImageLoading, setIsImageLoading] = useState(true);
 
   // ** Ref
   const scrollContainerRef = useRef(null);
@@ -35,10 +35,6 @@ export function MoviesList({ setSelectedMovie, selectedCineroom, handleMovieChan
       setPage(prevPage => prevPage + 1);
     }
   }, [isAllowRequest, movies]);
-
-  function handleImageLoad() {
-    setIsImageLoading(false);
-  };
 
   useEffect(() => {
     setIsAllowRequest(true)
@@ -83,7 +79,7 @@ export function MoviesList({ setSelectedMovie, selectedCineroom, handleMovieChan
       ) : (
         movies?.map((item, index) => (
           <MovieItem key={index} onClick={() => handleMovieChange(item)} $selected={selectedMovie?.id === item?.id}>
-            <MovieImage src={item.icon} alt="" onLoad={handleImageLoad} $isloading={isImageLoading}/>
+            <StyledAsyncImage src={item.icon} Transition={Blur} loader={<div style={{ background: 'black' }}/>}/>
             <RateContainer>
               <img src="/images/rate.svg" alt="" height={20} />
               <Rate>{item?.rate}</Rate>
