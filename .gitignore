@@ -18,6 +18,8 @@ build
 /frontend
 frontend
 
+/staticfiles
+staticfiles
 
 /config
 config
