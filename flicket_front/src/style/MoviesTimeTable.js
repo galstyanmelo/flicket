@@ -53,6 +53,8 @@ export const TimesContainer = styled.div`
   gap: 25px;
   padding-top: 35px;
   overflow-y: scroll;
+
+  ${({ $selectedTime }) => !$selectedTime && "padding-bottom: 40px"};
 `;
 
 export const TimeItem = styled.div`
@@ -85,4 +87,13 @@ export const Info = styled.span`
   @media (max-width: 500px) {
     ${({ $price }) => $price && "font-size: 15px"};
   }
+`;
+
+export const NoDatesMessage = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  padding: 25px 0;
+  height: 100px;
 `;
