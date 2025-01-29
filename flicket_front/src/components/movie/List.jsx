@@ -23,7 +23,7 @@ export function MoviesList({ setSelectedMovie, selectedCineroom, handleMovieChan
   const [searchTerm, setSearchTerm] = useState("")
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isAllowRequest, setIsAllowRequest] = useState(true);
 
   // ** Ref
@@ -46,6 +46,7 @@ export function MoviesList({ setSelectedMovie, selectedCineroom, handleMovieChan
     setPage(0);
     setSelectedMovie(null);
     const body = { cineroom_id: selectedCineroom, title: searchTerm };
+    setLoading(true);
     dispatch(movieSearchService({ page: 0, body }));
   }
 
@@ -60,6 +61,7 @@ export function MoviesList({ setSelectedMovie, selectedCineroom, handleMovieChan
     if (isAllowRequest && prevPageRef.current !== page) {
       prevPageRef.current = page;
       const body = { cineroom_id: selectedCineroom, title: searchTerm };
+      setLoading(true);
       dispatch(movieSearchService({ page, body }));
     }
   }, [dispatch, page, isAllowRequest, selectedCineroom, searchTerm]);
@@ -97,7 +99,7 @@ export function MoviesList({ setSelectedMovie, selectedCineroom, handleMovieChan
       </SearchContainer>
       <ListContainer ref={scrollContainerRef}>
         {loading && isAllowRequest ? (
-          <LoadingAnimation height="100%" />
+          <LoadingAnimation height="100px" />
         ) : (
           <>
             {!movies?.isEmpty() ? (
