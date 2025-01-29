@@ -67,23 +67,22 @@ export const TimeItem = styled.div`
   border-radius: 10px;
   width: 150px;
   padding: 10px;
-  cursor: pointer;
+  cursor: ${({ $available }) => $available ? "pointer" : "not-allowed"};
   gap: 10px;
 
   transition: transform 0.3s ease;
 
   &:hover {
-    transform: translateY(-8px);
+    ${({$available}) => $available && "transform: translateY(-8px)"};
   }
 
 `;
 
-export const TimeDate = styled.span`
-  color: white;
-  font-size: 24px;
-`;
+export const Info = styled.span`
+  color: ${({ color }) => color || 'white'};
+  font-size: ${({ fontSize }) => fontSize || '18px'};
 
-export const TimeDuration = styled.span`
-  font-size: 20px;
-  color: #c43a39;
+  @media (max-width: 500px) {
+    ${({ $price }) => $price && "font-size: 15px"};
+  }
 `;

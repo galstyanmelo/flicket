@@ -15,7 +15,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 export function Modal({ show, onHide, component }) {
   return (
-    <StyledDialog open={show} TransitionComponent={Transition} keepMounted onClose={onHide}>
+    <StyledDialog open={show} TransitionComponent={Transition} keepMounted onClose={onHide} slotProps={{ backdrop: { style: { backdropFilter: "blur(8px)" } } }}>
       {component}
     </StyledDialog>
   );

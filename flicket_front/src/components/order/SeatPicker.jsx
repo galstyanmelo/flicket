@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 // ** Styled Components
 import { Container, Footer, FooterButton, Header, NoTimetableMessage, Screen, SeatButton } from '../../style/SeatPicker'; 
 import { SeatGrid, SeatRow, SeatStatus, StatusBox, StatusColor, StatusText } from '../../style/SeatPicker';
+import { Info } from '../../style/MoviesTimeTable';
 
 // ** Utils
 import { getSeatVariant } from '../../utils/SeatPickerHelpers';
@@ -13,7 +14,11 @@ import { SEAT_PICKER_STATUSES } from '../../data/SeatPickerStatus';
 
 // ** Store
 import { resetTimetableSeats, timetableSeatsService } from '../../store/order/TimetableSeatsService';
-import { createSeatService, resetCreateSeat } from '../../store/order/CreateSeatService';
+import { resetCreateSeat } from '../../store/order/CreateSeatService';
+
+// ** Custom Components
+import { Modal } from '../modal/Modal';
+import { CardDetails } from './CardDetails';
 
 
 export function SeatPicker({ hideModal, empty, selectedTime, setSelectedTime }) {
@@ -27,10 +32,15 @@ export function SeatPicker({ hideModal, empty, selectedTime, setSelectedTime }) 
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [seats, setSeats] = useState(initalState);
   const [reservedSeats, setReservedSeats] = useState();
+  const [showPopup, setShowPopup] = useState(false)
 
   useEffect(() => {
-    if (selectedTime) {
-      dispatch(timetableSeatsService({ id: selectedTime }));
+    setSelectedSeats([])
+  }, [selectedTime])
+
+  useEffect(() => {
+    if (selectedTime?.id) {
+      dispatch(timetableSeatsService({ id: selectedTime?.id }));
     }
   }, [dispatch, selectedTime]);
 
@@ -71,16 +81,6 @@ export function SeatPicker({ hideModal, empty, selectedTime, setSelectedTime }) 
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, createSeatData]);
-
-  function handleOrder() {
-    const body = selectedSeats.map(seat => ({
-      timetable: selectedTime,
-      row: seat.row,
-      column: seat.column
-    }));
-      
-    dispatch(createSeatService({ body }))
-  };
 
   function handleSeatClick(rowIndex, colIndex) {
     const newSeats = [...seats];
@@ -123,7 +123,6 @@ export function SeatPicker({ hideModal, empty, selectedTime, setSelectedTime }) 
               </StatusBox>
             ))}
           </SeatStatus>
-
           <SeatGrid gap="20px" $pb>
             <SeatGrid gap="4px">
               {seats.slice(0, 5).map((row, rowIndex) => (
@@ -159,8 +158,10 @@ export function SeatPicker({ hideModal, empty, selectedTime, setSelectedTime }) 
       )}
       <Footer>
         <FooterButton $cancel onClick={handleCancelClick}>Cancel</FooterButton>
-        <FooterButton disabled={empty || selectedSeats.isEmpty()} onClick={handleOrder}>Order</FooterButton>
+        {!selectedSeats.isEmpty() && <Info $price fontSize='20px'>{selectedSeats.length} Tickets: {selectedSeats.length * selectedTime.price}$</Info>}
+        <FooterButton disabled={empty || selectedSeats.isEmpty()} onClick={() => setShowPopup(true)}>Order</FooterButton>
       </Footer>
+      <Modal show={showPopup} onHide={() => setShowPopup(false)} component={<CardDetails {...{setShowPopup, selectedSeats, selectedTime}}/>}/>
     </Container>
   );
 };

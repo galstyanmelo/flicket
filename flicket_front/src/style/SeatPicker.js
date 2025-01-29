@@ -116,6 +116,7 @@ export const Footer = styled.div`
   align-items: center;
   gap: 20px;
   color: white;
+  border-top: 1px solid #FCE5E5;
 `;
 
 export const FooterButton = styled.button`

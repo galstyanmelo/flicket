@@ -8,6 +8,7 @@ class Timetable(TimeStampedModel):
     date = models.DateField(_('Date'))
     start_time = models.TimeField(_('Start Time'))
     end_time = models.TimeField(_('End Time'))
+    price = models.FloatField(_('Price'), null=True, blank=True)
 
     class Meta:
         verbose_name = _('Timetable')
@@ -15,4 +16,4 @@ class Timetable(TimeStampedModel):
         ordering = ['date', 'start_time']
 
     def __str__(self):
-        return f"{self.movie.title} | {self.date} {self.start_time} - {self.end_time}"
+        return f"ID: {self.id} -> {self.movie.title} | {self.date} {self.start_time} - {self.end_time}"

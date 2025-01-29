@@ -46,7 +46,7 @@ export function MovieInfo() {
           <Plot>{selectedMovie && selectedMovie?.plot}</Plot>
           <ProducerSpan>{selectedMovie && `Producer: ${selectedMovie?.producer}`}</ProducerSpan>
           <GenreSpan>{selectedMovie && `Genre: ${selectedMovie?.genre.capitalizeFirst()}`}</GenreSpan>
-          <OrderButton ref={orderRef} onMouseMove={(e) => adjustGradientOnMouseMove(e, orderRef)} onClick={() => setShowModal(true)}>Order tickets</OrderButton>
+          {selectedMovie && <OrderButton ref={orderRef} onMouseMove={(e) => adjustGradientOnMouseMove(e, orderRef)} onClick={() => setShowModal(true)}>Order tickets</OrderButton>}
         </Content>
       </ContentContainer> 
       <MoviesList {...{setSelectedMovie, selectedCineroom, handleMovieChange, selectedMovie}}/>

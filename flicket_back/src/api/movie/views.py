@@ -11,6 +11,7 @@ from src.api.movie import schemas as docs
 
 class MoviesFilter(filters.FilterSet):
     cineroom_id = filters.NumberFilter(field_name='cineroom__id', lookup_expr='exact')
+    title = filters.CharFilter(field_name='title', lookup_expr='icontains')
 
 
 @method_decorator(**docs.movies_list)

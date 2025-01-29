@@ -8,32 +8,28 @@ import { AppHeader, ButtonsWarpper, HeaderButton } from "../../style/Header";
 // ** Store
 import { cineroomsService } from "../../store/cineroom/CineroomsService";
 
-export function Header({ setSelectedCineroom, selectedCineroom }) {
+export function Header({ setSelectedCineroom, selectedCineroom, searchTerm, setSearchTerm }) {
   // ** Hooks
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const cineroomsData = useSelector((state) => state.cinerooms);
 
   // ** States
-  const [cinerooms, setCinerooms] = useState([])
+  const [cinerooms, setCinerooms] = useState([]);
 
   useEffect(() => {
-    dispatch(cineroomsService())
-  }, [dispatch])
+    dispatch(cineroomsService());
+  }, [dispatch]);
 
   useEffect(() => {
-    if (cineroomsData.status === 'fulfilled') setCinerooms(cineroomsData.data)
-  }, [cineroomsData?.status, cineroomsData?.data])
+    if (cineroomsData.status === "fulfilled") setCinerooms(cineroomsData.data);
+  }, [cineroomsData?.status, cineroomsData?.data]);
 
   return (
     <AppHeader>
-      <img src="/images/logo.png" alt=""/>
+      <img src="/images/logo.png" alt="" />
       <ButtonsWarpper>
         {cinerooms?.map((cinema, index) => (
-          <HeaderButton 
-            key={index} 
-            onClick={() => setSelectedCineroom(cinema.id)}
-            selected={selectedCineroom === cinema.id}
-          >
+          <HeaderButton key={index} onClick={() => setSelectedCineroom(cinema.id)} selected={selectedCineroom === cinema.id}>
             {cinema.name}
           </HeaderButton>
         ))}

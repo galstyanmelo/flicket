@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { moviesTimetablesService, resetMoviesTimetables } from "../../store/order/MoviesTimetablesService";
 
 // ** Style Components
-import { Category, CategoryText, Container, Header, MovieInfo, TimeDate, TimeDuration, TimeItem, TimesContainer, Title } from "../../style/MoviesTimeTable";
+import { Category, CategoryText, Container, Header, Info, MovieInfo, TimeItem, TimesContainer, Title } from "../../style/MoviesTimeTable";
 
 // ** Custom Components
 import { SeatPicker } from "./SeatPicker";
@@ -32,7 +32,7 @@ export function MoviesTimetables({ selectedMovie, hideModal }) {
   useEffect(() => {
     if (moviesTimetablesData.status === "fulfilled") {
       setTimetables(moviesTimetablesData.data)
-      setSelectedTime(moviesTimetablesData.data?.[0]?.id)
+      setSelectedTime(moviesTimetablesData.data?.[0])
       dispatch(resetMoviesTimetables());
       setLoading(false)
     } else if (moviesTimetablesData.status === "rejected") {
@@ -56,9 +56,10 @@ export function MoviesTimetables({ selectedMovie, hideModal }) {
         !timetables?.isEmpty() && (
           <TimesContainer>
             {timetables.map((item, index) => (
-              <TimeItem key={index} selected={item.id === selectedTime} onClick={() => setSelectedTime(item.id)}>
-                <TimeDate>{item.date}</TimeDate>
-                <TimeDuration>{`${item.start_time.slice(0, -3)} - ${item.end_time.slice(0, -3)}`}</TimeDuration>
+              <TimeItem key={index} $available={!!item.price} selected={item.id === selectedTime.id} onClick={() => item.price && setSelectedTime(item)}>
+                <Info color="white" fontSize="24px">{item.date}</Info>
+                <Info color="#c43a39" fontSize="22px">{`${item.start_time.slice(0, -3)} - ${item.end_time.slice(0, -3)}`}</Info>
+                <Info color="white" fontSize="18px">{item.price ? `Price: $${item.price}` : "Not available"}</Info>
               </TimeItem>
             ))}
           </TimesContainer>

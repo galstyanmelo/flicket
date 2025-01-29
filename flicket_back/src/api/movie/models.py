@@ -17,3 +17,6 @@ class Movie(TimeStampedModel):
     icon = models.ImageField(upload_to='movies/icons/')
     poster = models.ImageField(upload_to='movies/posters/')
     cineroom = models.ForeignKey('cineroom.Cineroom', related_name='movies', on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.title} | {self.id}"

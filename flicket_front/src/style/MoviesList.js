@@ -1,6 +1,53 @@
 import { AsyncImage } from 'loadable-image';
 import styled from 'styled-components';
 
+export const SearchContainer = styled.div`
+  width: calc(100% - 100px);
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 50px;
+
+  @media (max-width: 900px) {
+    margin: 0 20px;
+    width: calc(100% - 40px);
+  }
+`;
+
+export const SearchBox = styled.div`
+  background-color: white;
+  border-radius: 40px;
+  height: 60px;
+  width: 300px;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 12px 0px, rgba(0, 0, 0, 0.08) 0px 1px 2px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+export const Input = styled.input`
+  border: none;
+  outline: none;
+  margin: 0 10px;
+  height: 35px;
+  font-size: 18px;
+  width: 215px;
+`;
+
+export const SearchIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  width: 48px;
+  background-color: #c23939;
+  border-radius: 50%;
+  position: absolute;
+  right: 10px;
+  top: 6px;
+  cursor: pointer;
+`;
+
 export const ListContainer = styled.div`
   width: calc(100% - 100px);
   padding: 25px 50px;
@@ -81,4 +128,14 @@ export const Rate = styled.div`
   color: #fec400;
   font-size: 20px;
   font-weight: bold;
+`;
+
+export const NotFoundMessage = styled.div`
+  width: 100%;
+  color: white;
+  font-size: 32px;
+  padding: 40px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 `;
