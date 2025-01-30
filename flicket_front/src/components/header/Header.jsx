@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 // ** Style Components
-import { AppHeader, ButtonsWarpper, HeaderButton } from "../../style/Header";
+import { AppHeader, ButtonsWarpper, HeaderButton, Logo, Spacer } from "../../style/Header";
 
 // ** Store
 import { cineroomsService } from "../../store/cineroom/CineroomsService";
 
-export function Header({ setSelectedCineroom, selectedCineroom, searchTerm, setSearchTerm }) {
+export function Header({ setSelectedCineroom, selectedCineroom }) {
   // ** Hooks
   const dispatch = useDispatch();
   const cineroomsData = useSelector((state) => state.cinerooms);
@@ -26,7 +26,8 @@ export function Header({ setSelectedCineroom, selectedCineroom, searchTerm, setS
 
   return (
     <AppHeader>
-      <img src="/images/logo.png" alt="" />
+      <Spacer/>
+      <Logo src="/images/logo.png" alt="" />
       <ButtonsWarpper>
         {cinerooms?.map((cinema, index) => (
           <HeaderButton key={index} onClick={() => setSelectedCineroom(cinema.id)} selected={selectedCineroom === cinema.id}>

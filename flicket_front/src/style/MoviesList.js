@@ -84,6 +84,11 @@ export const MovieItem = styled.div`
   flex-shrink: 0;
   transition: transform 0.3s ease;
 
+  @media (max-width: 1500px) {
+    height: 300px;
+    width: 240px;
+  }
+
   @media (max-width: 900px) {
     height: 200px;
     width: 150px;
